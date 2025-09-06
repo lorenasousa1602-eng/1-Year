@@ -16,12 +16,15 @@
       min-height: 100vh;
       text-align: center;
       color: #fff;
+      overflow: hidden;
     }
     .container {
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5);
       padding: 30px;
       border-radius: 15px;
-      max-width: 600px;
+      max-width: 700px;
+      z-index: 2;
+      position: relative;
     }
     h1 {
       font-size: 2.5em;
@@ -36,22 +39,67 @@
       font-style: italic;
       font-size: 1em;
     }
+    .fotos {
+      margin-top: 25px;
+    }
+    .fotos img {
+      width: 200px;
+      margin: 10px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    /* Corações flutuantes */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      color: #ff69b4;
+      font-size: 24px;
+      animation: floatUp 6s linear infinite;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    }
   </style>
 </head>
 <body>
+  <!-- Música de fundo -->
+  <audio autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    O teu navegador não suporta áudio.
+  </audio>
+
+  <!-- Conteúdo central -->
   <div class="container">
     <h1>💖 Feliz 1 Ano 💖</h1>
     <p>
-      Hoje celebramos 365 dias de amor, de carinho e de partilha.<br><br>
-      Descobri contigo que felicidade está nos detalhes:<br>
-      no sorriso que me acalma, no abraço que me protege,<br>
-      e em cada momento que construímos juntos.<br><br>
-      Que este seja apenas o início da nossa história. 🌹
+      Um ano ao teu lado é pouco perto do que quero viver contigo.<br>
+      Obrigada por cada abraço, sorriso e momento.<br>
+      Que venham muitos mais capítulos da nossa história. 🌹
     </p>
+    <div class="fotos">
+      <img src="img1.jpg" alt="Nós dois 1">
+      <img src="img2.jpg" alt="Nós dois 2">
+    </div>
     <div class="assinatura">
       Com amor,<br>
       Tua MOH ❤️
     </div>
   </div>
+
+  <!-- Script para criar corações flutuantes -->
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => { heart.remove(); }, 6000);
+    }
+    setInterval(createHeart, 500);
+  </script>
 </body>
 </html>
