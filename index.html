@@ -11,8 +11,11 @@
             color: #333;
             text-align: center;
             padding: 50px;
-            overflow-x: hidden;
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
         }
+
         h1 {
             color: #c71585;
             font-size: 2.5em;
@@ -21,6 +24,7 @@
             transform: translateY(-20px);
             animation: fadeIn 2s forwards;
         }
+
         .poema {
             font-size: 1.3em;
             max-width: 650px;
@@ -30,10 +34,35 @@
             transform: translateY(20px);
             animation: fadeIn 2s forwards 1s;
         }
+
         @keyframes fadeIn {
             to {
                 opacity: 1;
                 transform: none;
+            }
+        }
+
+        /* Estilo dos corações */
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* Animação de flutuação curva */
+        @keyframes floatCurve {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(50px, -50vh) scale(1.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(-50px, -100vh) scale(1.5);
+                opacity: 0;
             }
         }
     </style>
@@ -53,6 +82,33 @@
             a escrever esta história contigo. 💛
         </p>
     </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerText = '❤️';
+            
+            // Posição inicial horizontal aleatória
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            // Tamanho aleatório
+            const size = 20 + Math.random() * 30;
+            heart.style.fontSize = size + 'px';
+            // Duração aleatória da animação
+            const duration = 5 + Math.random() * 5;
+            heart.style.animation = `floatCurve ${duration}s ease-in-out forwards`;
+
+            document.body.appendChild(heart);
+
+            // Remove coração após a animação
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        // Cria corações periodicamente
+        setInterval(createHeart, 300);
+    </script>
 
 </body>
 </html>
